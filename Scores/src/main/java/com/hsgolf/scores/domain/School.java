@@ -1,15 +1,21 @@
 package com.hsgolf.scores.domain;
 
 import java.awt.Color;
+import java.io.Serializable;
 
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class School {
+@Embeddable
+public class School implements Serializable {
 	
+	
+	private static final long serialVersionUID = -7509783665402030216L;
 	private int id;
 	private String name;
 	private String mascot;
@@ -18,7 +24,15 @@ public class School {
 	private String phone;
 	private String address;
 	private String[] division = {"Division 1","Devision 2"};
-	//private int league;
+	private League leagueId;
+	
+	@EmbeddedId
+	public League getLeagueId() {
+		return leagueId;
+	}
+	public void setLeagueId(League leagueId) {
+		this.leagueId = leagueId;
+	}
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getId() {

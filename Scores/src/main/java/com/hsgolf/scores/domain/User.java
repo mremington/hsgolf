@@ -1,26 +1,42 @@
 package com.hsgolf.scores.domain;
 
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="users")
-public class User {
+@Embeddable
+public class User implements Serializable {
 	
+
+	private static final long serialVersionUID = -216112948414320556L;
 	private Long id;
 	private String username;
 	private String password;
 	private String firstName;
 	private String lastName;
 	private String email;
-	//private int school;
+	private School schoolId;
 	private String phone;
 	private String address;
 	private String[] type = {"player", "coach", "admin", "ad", "public"};
 	
+	
+	@EmbeddedId
+	public School getSchoolId() {
+		return schoolId;
+	}
+	public void setSchoolId(School schoolId) {
+		this.schoolId = schoolId;
+	}
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getId() {
 		return id;

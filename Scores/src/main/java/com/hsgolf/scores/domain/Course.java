@@ -1,21 +1,34 @@
 package com.hsgolf.scores.domain;
 
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Course {
-	
+@Embeddable
+public class Course implements Serializable {
+
+	private static final long serialVersionUID = -7150949196998493314L;
 	private int id;
-	//private int teebox;
+	private Teebox teeboxId;
 	private String name;
 	private int frontNinePar;
 	private int backNinePar;
 	private String phone;
 	private String address;
 	
+	@EmbeddedId
+	public Teebox getTeeboxId() {
+		return teeboxId;
+	}
+	public void setTeeboxId(Teebox teeboxId) {
+		this.teeboxId = teeboxId;
+	}
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getId() {
 		return id;

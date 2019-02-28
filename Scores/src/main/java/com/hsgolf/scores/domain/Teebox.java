@@ -1,13 +1,18 @@
 package com.hsgolf.scores.domain;
 
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Teebox {
+@Embeddable
+public class Teebox implements Serializable {
 	
+	private static final long serialVersionUID = 6509500494906591771L;
 	private int id;
 	private String description;
 	private int mensSlope;

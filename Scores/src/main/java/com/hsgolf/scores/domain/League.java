@@ -1,15 +1,22 @@
 package com.hsgolf.scores.domain;
 
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class League {
+@Embeddable
+public class League implements Serializable {
+
+	private static final long serialVersionUID = 8800112542101068988L;
 	private int id;
 	private String name;
-	//private long representative;
+	private User representativeId;
 	private String[] conference = {"NCC", "SCC"};
 	private String[] section = {"San Diego", "Orange"};
 	private String[] reigion = {"Southern", "Northern"};
@@ -20,6 +27,13 @@ public class League {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	@EmbeddedId
+	public User getRepresentativeId() {
+		return representativeId;
+	}
+	public void setRepresentativeId(User representativeId) {
+		this.representativeId = representativeId;
 	}
 	public String getName() {
 		return name;
